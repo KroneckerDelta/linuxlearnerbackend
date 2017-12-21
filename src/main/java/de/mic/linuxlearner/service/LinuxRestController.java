@@ -25,22 +25,22 @@ public class LinuxRestController
 
     @PostMapping("/command")
     @Timed(millis = 1000)
-    public String createFahrer(@RequestBody LinuxCommand command) throws URISyntaxException
+    public String createFahrer(@RequestBody LinuxCommandModel command) throws URISyntaxException
     {
-
         // do some stuff
         return dispatcher.resolve(command);
     }
 
     @RequestMapping(value = "/example", method = RequestMethod.GET)
-    public LinuxCommand example()
+    public LinuxCommandModel example()
     {
-        LinuxCommand linuxCommand = new LinuxCommand();
+        LinuxCommandModel linuxCommand = new LinuxCommandModel();
         linuxCommand.setCommand("grep");
         linuxCommand.setSource("Dieser Text wird gegrept");
         linuxCommand.setSchalter("inverse");
+        linuxCommand.setPattern("abc");
 
-        LinuxCommand wc = new LinuxCommand();
+        LinuxCommandModel wc = new LinuxCommandModel();
         wc.setCommand("wc");
 
         linuxCommand.setPipe(wc);
