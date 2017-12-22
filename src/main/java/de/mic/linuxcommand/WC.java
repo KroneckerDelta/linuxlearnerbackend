@@ -35,7 +35,17 @@ public class WC extends LinuxCommandImpl implements LinuxCommand
 
     private WcOptions extractSchalter(String schalter)
     {
-        return WcOption.chars;
+        switch (schalter.toLowerCase())
+        {
+            case "chars":
+                return WcOption.chars;
+            case "lines":
+                return WcOption.lines;
+            case "words":
+                return WcOption.words;
+            default:
+                return WcOption.chars;
+        }
     }
 
 }

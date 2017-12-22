@@ -12,7 +12,7 @@ public class WCTest
     @Test
     public void findOneWord() throws Exception
     {
-        LinuxCommandModel model = getWCModel("EinWort", "word");
+        LinuxCommandModel model = getWCModel("EinWort", "words");
         WC wc = new WC(model);
         assertEquals("1", wc.execute());
     }
@@ -20,7 +20,7 @@ public class WCTest
     @Test
     public void findTwoWords() throws Exception
     {
-        LinuxCommandModel model = getWCModel("Zwei Wörter", "word");
+        LinuxCommandModel model = getWCModel("Zwei Wörter", "words");
         WC wc = new WC(model);
         assertEquals("2", wc.execute());
     }
@@ -28,7 +28,7 @@ public class WCTest
     @Test
     public void findMoreWords() throws Exception
     {
-        LinuxCommandModel model = getWCModel("Viel Wörter die hier stehen", "word");
+        LinuxCommandModel model = getWCModel("Viel Wörter die hier stehen", "words");
         WC wc = new WC(model);
         assertEquals("5", wc.execute());
     }
