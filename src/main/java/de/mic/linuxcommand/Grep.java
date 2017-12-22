@@ -47,16 +47,36 @@ public class Grep extends LinuxCommandImpl implements LinuxCommand
 
         if (schalter == null)
         {
-
             return Unix4j.fromString(source).grep(pattern).toStringResult();
         }
         else
         {
-
-            // Schalter noch auswerten
-            return Unix4j.fromString(source).grep(pattern).toStringResult();
+            return Unix4j.fromString(source).grep(extractOption(schalter), pattern).toStringResult();
         }
 
+    }
+
+    private GrepOptions extractOption(String schalter)
+    {
+        switch (schalter.toLowerCase())
+        {
+            case "count":
+                return GrepOption.count;
+            case "fixedstrings":
+                return GrepOption.fixedStrings;
+            case "ignorecase":
+                return GrepOption.ignoreCase;
+            case "invertmatch":
+                return GrepOption.invertMatch;
+            case "linenumber":
+                return GrepOption.lineNumber;
+            case "matchingfiles":
+                return GrepOption.matchingFiles;
+            case "wholeline":
+                return GrepOption.wholeLine;
+            default:
+                return GrepOption.ignoreCase;
+        }
     }
 
 }
