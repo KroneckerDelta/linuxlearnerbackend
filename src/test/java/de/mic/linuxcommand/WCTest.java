@@ -57,6 +57,33 @@ public class WCTest
         assertEquals("5", wc.execute());
     }
 
+    @Test
+    public void findOneLine() throws Exception
+    {
+        LinuxCommandModel model = getWCModel("A B C", "lines");
+        WC wc = new WC(model);
+        assertEquals("1", wc.execute());
+    }
+
+    @Test
+    public void findTwoLines() throws Exception
+    {
+        String sep = System.lineSeparator();
+        LinuxCommandModel model = getWCModel("A B C" + sep + " D E F", "lines");
+        WC wc = new WC(model);
+        assertEquals("2", wc.execute());
+    }
+
+    @Test
+    public void findMoreLines() throws Exception
+    {
+        String sep = System.lineSeparator();
+        LinuxCommandModel model = getWCModel("A B C " + sep + " D E F " + sep + " skdidjd " + sep + " sdkksdk " + sep + " dsssudn ds dj d sdsd ds ssds ds" + sep + " ENDE",
+                "lines");
+        WC wc = new WC(model);
+        assertEquals("6", wc.execute());
+    }
+
     private LinuxCommandModel getWCModel(String source, String schalter)
     {
         LinuxCommandModel model = new LinuxCommandModel();
