@@ -22,7 +22,7 @@ public class GrepTest
                     "dies ist ein richtiger Text";
 
     @Test
-    public void findNoLineWithoutOptions()
+    public void findNoLinewithOptions()
     {
         LinuxCommandModel model = getGrep(shortText, "", "xxx");
         Grep grep = new Grep(model);
@@ -54,7 +54,7 @@ public class GrepTest
     }
 
     @Test
-    public void findOneLineWithoutOptionsLinenumber()
+    public void findOneLinewithOptionsLinenumber()
     {
         LinuxCommandModel model = getGrep(shortText, "linenumber", "ist");
         Grep grep = new Grep(model);
@@ -78,11 +78,92 @@ public class GrepTest
     }
 
     @Test
-    public void findOneLineWithoutOptions()
+    public void findOneLinewithOptions()
     {
         LinuxCommandModel model = getGrep(shortText, "", "ist");
         Grep grep = new Grep(model);
         assertEquals(shortText, grep.execute());
+    }
+
+    /**
+     * <pre>
+     * *********************************************************************
+     * *********************************************************************
+     * **************  Ab hier die mehrzeiligen Dsteien  *******************
+     * *********************************************************************
+     * *********************************************************************
+     * </pre>
+     */
+
+    @Test
+    public void findNoLinewithOptions1()
+    {
+        LinuxCommandModel model = getGrep(longText, "", "xxx");
+        Grep grep = new Grep(model);
+        assertEquals("", grep.execute());
+    }
+
+    @Test
+    public void findOneLineWithCount1()
+    {
+        LinuxCommandModel model = getGrep(longText, "count", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("1", grep.execute());
+    }
+
+    @Test
+    public void findOneLineWithFixedstrings1()
+    {
+        LinuxCommandModel model = getGrep(longText, "fixedstrings", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("dies ist ein richtiger Text", grep.execute());
+    }
+
+    @Test
+    public void findOneLineWithIgnorecase1()
+    {
+        LinuxCommandModel model = getGrep(longText, "ignorecase", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("dies ist ein richtiger Text", grep.execute());
+    }
+
+    @Test
+    public void findOneLinewithOptionsLinenumber1()
+    {
+        LinuxCommandModel model = getGrep(longText, "linenumber", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("dies ist ein richtiger Text", grep.execute());
+    }
+
+    @Test
+    public void dontFindOneLineWithWholeline1()
+    {
+        LinuxCommandModel model = getGrep(longText, "wholeline", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("", grep.execute());
+    }
+
+    @Test
+    public void findOneLineWithWholeline1()
+    {
+        LinuxCommandModel model = getGrep(longText, "wholeline", "dies ist ein richtiger Text");
+        Grep grep = new Grep(model);
+        assertEquals("dies ist ein richtiger Text", grep.execute());
+    }
+
+    @Test
+    public void findOneLinewithOptions1()
+    {
+        LinuxCommandModel model = getGrep(longText, "", "ist");
+        Grep grep = new Grep(model);
+        assertEquals("dies ist ein richtiger Text", grep.execute());
+    }
+
+    @Test
+    public void findmoreLines()
+    {
+        LinuxCommandModel model = getGrep(longText, "", "abc");
+        Grep grep = new Grep(model);
     }
 
     private LinuxCommandModel getGrep(String source, String schalter, String pattern)
