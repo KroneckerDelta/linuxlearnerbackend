@@ -12,8 +12,13 @@ import org.unix4j.unix.grep.GrepOptions;
 
 import de.mic.linuxlearner.service.LinuxCommandModel;
 
-public class Grep implements LinuxCommand
+public class Grep extends LinuxCommandImpl implements LinuxCommand
 {
+
+    public Grep(LinuxCommandModel model)
+    {
+        super(model);
+    }
 
     public void testSomething()
     {
@@ -34,11 +39,11 @@ public class Grep implements LinuxCommand
 
     }
 
-    public String execute(LinuxCommandModel command)
+    public String execute()
     {
-        String schalter = command.getSchalter();
-        String pattern = command.getPattern();
-        String source = command.getSource();
+        String schalter = model.getSchalter();
+        String pattern = model.getPattern();
+        String source = model.getSource();
 
         if (schalter == null)
         {

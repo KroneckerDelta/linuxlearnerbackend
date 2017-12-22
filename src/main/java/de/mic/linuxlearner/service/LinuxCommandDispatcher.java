@@ -1,10 +1,9 @@
 package de.mic.linuxlearner.service;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import de.mic.linuxcommand.LinuxCommandFinder;
-
-@Controller
+@Service
 public class LinuxCommandDispatcher
 {
 
@@ -12,29 +11,24 @@ public class LinuxCommandDispatcher
 
     private LinuxCommandFinder finder;
 
-    public String resolve(LinuxCommandModel command)
+    @Autowired
+    public LinuxCommandDispatcher(LinuxCommandFinder finder)
     {
-        source = command.getSource();
+        this.finder = finder;
 
-        return resolveImpl(command);
     }
 
-    public String resolveImpl(LinuxCommandModel command)
+    public String resolve(LinuxCommandModel command)
     {
-
+        String ergebnis = finder.getLinuxCommand(command).execute();
         if (command.getPipe() == null)
         {
-            String linuxCommand = command.getCommand();
-            String schalter = command.getSchalter();
-            String pattern = command.getPattern();
-            command.setSource(source);
-            return finder.getLinuxCommand(linuxCommand).execute(command);
+            return ergebnis;
         }
         else
         {
-            return resolveImpl(command.getPipe());
+            command.getPipe().setSource(ergebnis);
+            return resolve(command.getPipe());
         }
-
     }
-
 }
