@@ -10,12 +10,15 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 @Configuration
 @EnableAutoConfiguration
-public class LinuxLearnerApp {
+public class LinuxLearnerApp
+{
 
-	private static final Logger log = LoggerFactory.getLogger(LinuxLearnerApp.class);
+    private static final Logger log = LoggerFactory.getLogger(LinuxLearnerApp.class);
 
-	public static void main(String args[]) {
-		SpringApplication.run(LinuxLearnerApp.class);
-	}
+    public static void main(String args[])
+    {
+        log.info("Start Linuxlearner");
+        SpringApplication.run(LinuxLearnerApp.class);
+    }
 
 }

@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LinuxRestController
 {
 
-    private LinuxCommandDispatcher dispatcher;
+    private LinuxCommandResolver dispatcher;
 
     @Autowired
-    public LinuxRestController(LinuxCommandDispatcher dispatcher)
+    public LinuxRestController(LinuxCommandResolver dispatcher)
     {
         this.dispatcher = dispatcher;
     }

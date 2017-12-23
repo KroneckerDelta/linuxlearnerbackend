@@ -4,20 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LinuxCommandDispatcher
+public class LinuxCommandResolver
 {
-
-    private String source;
 
     private LinuxCommandFinder finder;
 
     @Autowired
-    public LinuxCommandDispatcher(LinuxCommandFinder finder)
+    public LinuxCommandResolver(LinuxCommandFinder finder)
     {
         this.finder = finder;
 
     }
 
+    /**
+     * Resolve all pipes Commands
+     * 
+     * @param command
+     * @return
+     */
     public String resolve(LinuxCommandModel command)
     {
         String ergebnis = finder.getLinuxCommand(command).execute();

@@ -5,18 +5,22 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes =
-{ LinuxCommandDispatcher.class, LinuxCommandFinder.class })
-public class LinuxCommandDispatcherTest
-
+{ LinuxCommandResolver.class, LinuxCommandFinder.class })
+public class LinuxCommandResolverTest
 {
+
+    private static final Logger log = LoggerFactory.getLogger(LinuxCommandResolverTest.class);
+
     @Autowired
-    private LinuxCommandDispatcher linuxCommandDispatcher;
+    private LinuxCommandResolver linuxCommandDispatcher;
 
     @Test
     public void dispatcherIsNotNull() throws Exception
@@ -32,7 +36,7 @@ public class LinuxCommandDispatcherTest
         model.setPattern("ab");
         model.setSource("abcdejdjkwikwndjlfsdfhk" + "dsdsds" + "dsdsds" + "dsdsds" + "\\naaaaaaaaaaaaaa");
         String resolve = linuxCommandDispatcher.resolve(model);
-        System.out.println("REsolve: " + resolve);
+        log.info("REsolve: " + resolve);
     }
 
     @Test
@@ -50,7 +54,7 @@ public class LinuxCommandDispatcherTest
         model.setPipe(pipe);
 
         String resolve = linuxCommandDispatcher.resolve(model);
-        System.out.println("REsolve: " + resolve);
+        log.info("REsolve: " + resolve);
     }
 
     @Test
@@ -65,7 +69,7 @@ public class LinuxCommandDispatcherTest
         model.setPipe(pipe);
 
         String resolve = linuxCommandDispatcher.resolve(model);
-        System.out.println("REsolve: " + resolve);
+        log.info("REsolve: " + resolve);
         assertEquals(resolve, "1");
     }
 
