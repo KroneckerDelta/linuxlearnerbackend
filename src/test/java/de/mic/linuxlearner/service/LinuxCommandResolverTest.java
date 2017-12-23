@@ -66,6 +66,8 @@ public class LinuxCommandResolverTest
         model.setSchalter("char");
         LinuxCommandModel pipe = new LinuxCommandModel();
         pipe.setCommand("wc");
+        pipe.setSchalter("char");
+
         model.setPipe(pipe);
 
         String resolve = linuxCommandDispatcher.resolve(model);
@@ -92,7 +94,7 @@ public class LinuxCommandResolverTest
         LinuxCommandModel model = new LinuxCommandModel();
         model.setCommand("wc");
         model.setSource("kwndjlfs");
-        model.setSchalter("char");
+        model.setSchalter("words");
 
         String resolve = linuxCommandDispatcher.resolve(model);
 
@@ -105,7 +107,7 @@ public class LinuxCommandResolverTest
         LinuxCommandModel model = new LinuxCommandModel();
         model.setCommand("wc");
         model.setSource("dies ist ein Satz");
-        model.setSchalter("char");
+        model.setSchalter("words");
 
         String resolve = linuxCommandDispatcher.resolve(model);
 
