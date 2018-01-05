@@ -1,6 +1,8 @@
 package de.mic.linuxcommand;
 
 import org.unix4j.Unix4j;
+import org.unix4j.unix.sed.SedOption;
+import org.unix4j.unix.sed.SedOptions;
 import org.unix4j.unix.sort.SortOption;
 import org.unix4j.unix.sort.SortOptions;
 
@@ -65,4 +67,11 @@ public class Sort extends LinuxCommandImpl implements LinuxCommand
         return null;
     }
 
+    public static void main(String[] args)
+    {
+        for (SedOptions o : SedOption.values())
+        {
+            System.out.println(o.toString() + ",");
+        }
+    }
 }
